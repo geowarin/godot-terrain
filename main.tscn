@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhg5vqs62ja3x"]
+
+[ext_resource type="PackedScene" uid="uid://rbv8555xemhc" path="res://Terrain.tscn" id="1_wlefd"]
+[ext_resource type="Texture2D" uid="uid://c4ap5xohiesjd" path="res://addons/kenney_prototype_textures/green/texture_01.png" id="2_adhfs"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4sk5k"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4i7pe"]
+subdivide_width = 1
+subdivide_height = 1
+subdivide_depth = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0hhw"]
+albedo_texture = ExtResource( "2_adhfs" )
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_svgk0"]
+
+[sub_resource type="Sky" id="Sky_ly6df"]
+sky_material = SubResource( "ProceduralSkyMaterial_svgk0" )
+
+[sub_resource type="Environment" id="Environment_fsurv"]
+background_mode = 2
+sky = SubResource( "Sky_ly6df" )
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Terrain" parent="." instance=ExtResource( "1_wlefd" )]
+
+[node name="RigidDynamicBody3D" type="RigidDynamicBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.4296, -13.5565)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidDynamicBody3D"]
+shape = SubResource( "ConvexPolygonShape3D_4sk5k" )
+
+[node name="cube" type="MeshInstance3D" parent="RigidDynamicBody3D"]
+mesh = SubResource( "BoxMesh_4i7pe" )
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource( "StandardMaterial3D_h0hhw" )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.0993, 17.936)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25472, 0.967015, 0, -0.967015, 0.25472, 0, 48.9402, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( "Environment_fsurv" )

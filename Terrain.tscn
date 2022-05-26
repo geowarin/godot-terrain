@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://rbv8555xemhc"]
+
+[ext_resource type="Material" uid="uid://c63xrmxa7ixea" path="res://terrain_mat.tres" id="1_gevw4"]
+[ext_resource type="Script" path="res://Terrain.cs" id="2_4mnsi"]
+[ext_resource type="Texture2D" uid="uid://p200uipqe52l" path="res://10x10_heightmap.png" id="3_ss37h"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nalo5"]
+size = Vector2(100, 100)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_u07tc"]
+map_width = 11
+map_depth = 11
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="Terrain" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.9728, 0)
+mesh = SubResource( "PlaneMesh_nalo5" )
+surface_material_override/0 = ExtResource( "1_gevw4" )
+script = ExtResource( "2_4mnsi" )
+HeightMap = ExtResource( "3_ss37h" )
+TerrainAccentuation = 50.0
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource( "HeightMapShape3D_u07tc" )
