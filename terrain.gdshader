@@ -1,8 +1,8 @@
 shader_type spatial;
 
-uniform sampler2D texture_albedo : hint_albedo,filter_linear_mipmap,repeat_enable;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
 
-uniform sampler2D u_terrain_heightmap: hint_albedo, filter_linear_mipmap, repeat_enable;
+uniform sampler2D u_terrain_heightmap: hint_default_black, repeat_disable;
 uniform float terrain_accentuation = 50.0;
 
 void vertex() {

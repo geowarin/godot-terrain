@@ -57,11 +57,12 @@ public partial class Terrain : Node3D {
       GD.PrintErr("Image is compressed");
       return;
     }
-
+    
     var mapData = new float[mapWidth * mapHeight];
+
     for (var index = 0; index < mapWidth * mapHeight; index++) {
-      var x = (float) index / mapWidth;
-      var y = (float) index % mapWidth;
+      var x = FloorToInt((float) index / mapWidth);
+      var y = FloorToInt((float) index % mapWidth);
       var height = GetPixelAverage(image, x, y);
       mapData[index] = height * TerrainAccentuation;
     }
@@ -69,26 +70,21 @@ public partial class Terrain : Node3D {
     heightMapShape.MapData = mapData;
   }
 
-  private static float GetPixelAverage(Image image, float vertX, float vertY) {
-    var x0 = FloorToInt(vertX);
-    var y0 = FloorToInt(vertY);
+  private static float GetPixelAverage(Image image, int x0, int y0) {
+    var h00 = GetPixelClamped(image, x0 - 1, y0 - 1);
+    var h10 = GetPixelClamped(image, x0, y0 - 1);
+    var h11 = GetPixelClamped(image, x0 - 1, y0);
+    var h01 = GetPixelClamped(image, x0, y0);
+    if (h00 == null && h10 == null && h01 == null && h11 == null) return 0f;
 
-    var xf = vertX - x0;
-    var yf = vertY - y0;
-    
-    var h00 = GetPixelClamped(image, x0, y0).r;
-    var h10 = GetPixelClamped(image, x0 + 1, y0).r;
-    var h01 = GetPixelClamped(image, x0, y0 + 1).r;
-    var h11 = GetPixelClamped(image, x0 + 1, y0 + 1).r;
-    // Bilinear filter
-    return Lerp(
-        Lerp(h00, h10, xf), 
-        Lerp(h01, h11, xf), yf);
+    return (h00?.r ?? 0f + h10?.r ?? 0f + h01?.r ?? 0f + h11?.r ?? 0f) /
+           ((h00 == null ? 0f : 1f) + (h10 == null ? 0f : 1f) + (h01 == null ? 0f : 1f) +
+            (h11 == null ? 0f : 1f));
   }
 
-  private static Color GetPixelClamped(Image im, int x, int y) {
-    x = Clamp(x, 0, im.GetWidth() - 1);
-    y = Clamp(y, 0, im.GetHeight() - 1);
+  private static Color? GetPixelClamped(Image im, int x, int y) {
+    if (x < 0 || x > im.GetWidth() - 1) return null;
+    if (y < 0 || y > im.GetHeight() - 1) return null;
     return im.GetPixel(x, y);
   }
 
