@@ -39,10 +39,10 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource( "StandardMaterial3D_h0hhw" )
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.0993, 17.936)
+transform = Transform3D(-4.33276e-08, -0.132222, 0.99122, -5.7796e-09, 0.99122, 0.132222, -1, 1.33227e-15, -4.37114e-08, 8.64622, 2.70169, -0.370026)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.25472, 0.967015, 0, -0.967015, 0.25472, 0, 48.9402, 0)
+transform = Transform3D(1, 0, 0, 0, 0.427563, 0.903986, 0, -0.903986, 0.427563, 0, 6.78211, 3.83459)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
