@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://2kygytwyirfh"]
+
+[ext_resource type="Script" path="res://ColorTerrain.cs" id="1_7wch8"]
+[ext_resource type="Texture2D" uid="uid://be5kattrhpoyn" path="res://color.png" id="2_div0r"]
+[ext_resource type="Shader" path="res://color_terrain.gdshader" id="2_mcru1"]
+[ext_resource type="Environment" uid="uid://byay3t7ul28qf" path="res://env.tres" id="4_25r1s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mog8e"]
+size = Vector2(1, 1)
+subdivide_width = 510
+subdivide_depth = 510
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2gp5q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_87wie"]
+render_priority = 0
+shader = ExtResource( "2_mcru1" )
+shader_param/heightmap = ExtResource( "2_div0r" )
+shader_param/terrain_accentuation = 31.0
+shader_param/water = SubResource( "CanvasTexture_2gp5q" )
+
+[node name="ColorTerrain" type="Node3D"]
+script = ExtResource( "1_7wch8" )
+HeightMap = ExtResource( "2_div0r" )
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(511, 0, 0, 0, 1, 0, 0, 0, 511, 0, 0, 0)
+mesh = SubResource( "PlaneMesh_mog8e" )
+surface_material_override/0 = SubResource( "ShaderMaterial_87wie" )
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0, 65, -238.635)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( "4_25r1s" )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994172, 0.107808, 0, -0.107808, 0.994172, 0, 101.841, 0)
