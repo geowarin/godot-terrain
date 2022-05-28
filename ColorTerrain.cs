@@ -29,18 +29,32 @@ public partial class ColorTerrain : Node3D {
   private MeshInstance3D? _meshInstance;
 
   private void Generate() {
-    GD.Print("Generate");
+    _meshInstance = GetNode<MeshInstance3D>("Mesh");
     if (HeightMap is null || _meshInstance is null) {
       return;
     }
+    GD.Print("Generate");
     
     var surfaceMaterial = (ShaderMaterial) _meshInstance.GetSurfaceOverrideMaterial(0);
-    surfaceMaterial.SetShaderParam("terrain_accentuation", TerrainAccentuation);
-    surfaceMaterial.SetShaderParam("heightmap", HeightMap);
-    
-    var mesh = (PlaneMesh) _meshInstance.Mesh;
 
+    Texture2D heightmapTex = ConvertToHeightmap(HeightMap);
+    surfaceMaterial.SetShaderParam("u_terrain_accentuation", TerrainAccentuation);
+    surfaceMaterial.SetShaderParam("u_heightmap", heightmapTex);
+    surfaceMaterial.SetShaderParam("u_tex", HeightMap);
+    
     var image = HeightMap.GetImage();
+    SizeMesh(image);
+  }
+
+  private Texture2D ConvertToHeightmap(Texture2D heightMap) {
+    var texture2D = new ImageTexture();
+    texture2D.CreateFromImage(heightMap.GetImage());
+    return texture2D;
+  }
+
+  private void SizeMesh(Image image)
+  {
+    var mesh = (PlaneMesh) _meshInstance.Mesh;
     var imageWidth = image.GetWidth();
     var imageHeight = image.GetHeight();
 
