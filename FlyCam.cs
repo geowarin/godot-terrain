@@ -30,9 +30,9 @@ public partial class FlyCam : CharacterBody3D {
     // vel.y += delta * _gravity;
 
     if (Input.IsActionJustPressed("ui_cancel")) {
-      Input.SetMouseMode(Input.GetMouseMode() == Input.MouseMode.Visible
-                             ? Input.MouseMode.Captured
-                             : Input.MouseMode.Visible);
+      Input.MouseMode = Input.MouseMode == Input.MouseModeEnum.Visible
+          ? Input.MouseModeEnum.Captured
+          : Input.MouseModeEnum.Visible;
     }
 
     var target = dir * MaxSpeed;
@@ -47,12 +47,12 @@ public partial class FlyCam : CharacterBody3D {
     _camera = GetNode<Camera3D>("RotationHelper/Camera");
     _rotationHelper = GetNode<Node3D>("RotationHelper");
 
-    Input.SetMouseMode(Input.MouseMode.Captured);
+    Input.MouseMode = Input.MouseModeEnum.Captured;
   }
 
   public override void _Input(InputEvent @event) {
     if (@event is InputEventMouseMotion mouseEvent &&
-        Input.GetMouseMode() == Input.MouseMode.Captured) {
+        Input.MouseMode == Input.MouseModeEnum.Captured) {
       _rotationHelper.RotateX(Mathf.Deg2Rad(mouseEvent.Relative.y * MouseSensitivity));
       RotateY(Mathf.Deg2Rad(-mouseEvent.Relative.x * MouseSensitivity));
 
