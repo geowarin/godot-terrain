@@ -75,15 +75,10 @@ public partial class ColorTerrain : Node3D {
     }
     
     var width = hmImg.GetWidth();
-    // var width = 10;
     var height = hmImg.GetHeight();
-    // var height = 10;
     for (var x = 0; x < width - 1; x++) {
       for (var y = 0; y < height - 1; y++) {
         var color = newImage.GetPixel(x, y);
-        // if (x < 10 && y < 10) {
-        //   GD.Print(x, " ", y, " ", color.ToHTML(), " =? ", color1.ToHTML());
-        // }
         var elevation = _levels.GetValueOrDefault(color, 0f);
         newImage.SetPixel(x, y, new Color(elevation, 0f, 0f));
       }

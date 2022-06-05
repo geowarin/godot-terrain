@@ -9,10 +9,10 @@ size = Vector2(1, 1)
 subdivide_width = 9
 subdivide_depth = 9
 
-[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_qinlg"]
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_vo8y2"]
 map_width = 11
 map_depth = 11
-map_data = PackedFloat32Array(5.01961, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 5.01961, 0, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.2549, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.2549, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.01961, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+map_data = PackedFloat32Array(5.01961, 2.5098, 0, 0, 0, 0, 0, 0, 0, 2.5098, 5.01961, 2.5098, 1.2549, 0, 0, 0, 0, 0, 0, 0, 1.2549, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.2549, 2.5098, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 2.5098, 5.01961, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 1.2549, 2.5098, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.5098, 1.2549, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.01961, 2.5098, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Terrain" type="Node3D"]
 script = ExtResource( "2_4mnsi" )
@@ -22,11 +22,10 @@ TerrainAccentuation = 10.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-visible = false
 mesh = SubResource( "PlaneMesh_vekds" )
 surface_material_override/0 = ExtResource( "3_hxcoj" )
 
 [node name="StaticBody" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="StaticBody"]
-shape = SubResource( "HeightMapShape3D_qinlg" )
+shape = SubResource( "HeightMapShape3D_vo8y2" )

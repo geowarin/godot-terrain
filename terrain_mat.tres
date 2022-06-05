@@ -1,11 +1,11 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c63xrmxa7ixea"]
 
 [ext_resource type="Shader" path="res://terrain.gdshader" id="1_e04x1"]
-[ext_resource type="Texture2D" uid="uid://p200uipqe52l" path="res://10x10_heightmap.png" id="3_qg4g5"]
+[ext_resource type="Texture2D" uid="uid://dq8mx6trxfe0a" path="res://10x10-onewhite.png" id="3_caq65"]
 
 [resource]
 render_priority = 0
 shader = ExtResource( "1_e04x1" )
 shader_param/terrain_accentuation = 10.0
-shader_param/texture_albedo = ExtResource( "3_qg4g5" )
-shader_param/u_terrain_heightmap = ExtResource( "3_qg4g5" )
+shader_param/texture_albedo = ExtResource( "3_caq65" )
+shader_param/u_terrain_heightmap = ExtResource( "3_caq65" )
